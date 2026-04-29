@@ -6,14 +6,20 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "loan_details_section",
   "loan_id",
   "member",
-  "book_item",
-  "column_break_jwcj",
+  "column_break_gagl",
+  "member_id",
+  "section_break_kmwy",
+  "book_id",
+  "book_title",
+  "status",
+  "column_break_uyvu",
   "issue_date",
   "due_date",
   "return_date",
-  "status"
+  "amended_from"
  ],
  "fields": [
   {
@@ -23,18 +29,6 @@
    "label": "Member",
    "options": "Member",
    "reqd": 1
-  },
-  {
-   "fieldname": "book_item",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Book Item",
-   "options": "Book Item",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_jwcj",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "issue_date",
@@ -67,12 +61,66 @@
    "fieldtype": "Data",
    "label": "Loan ID",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_kmwy",
+   "fieldtype": "Section Break",
+   "label": "Book Details"
+  },
+  {
+   "fieldname": "column_break_uyvu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_gagl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "loan_details_section",
+   "fieldtype": "Section Break",
+   "label": "Loan Details"
+  },
+  {
+   "fetch_from": "book_id.book",
+   "fieldname": "book_title",
+   "fieldtype": "Link",
+   "label": "Book Title",
+   "options": "Book",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "member.membership_id",
+   "fieldname": "member_id",
+   "fieldtype": "Data",
+   "label": "Member ID",
+   "options": "Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Loan",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "book_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Book ID",
+   "link_filters": "[[\"Book Item\",\"status\",\"=\",\"Available\"]]",
+   "options": "Book Item",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2026-04-28 22:52:43.580238",
+ "modified": "2026-04-29 23:23:07.586944",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Loan",
