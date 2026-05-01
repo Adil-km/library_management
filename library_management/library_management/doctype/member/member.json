@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": ".{first_name}-M.####",
+ "autoname": ".{first_name}.-.####",
  "creation": "2026-04-28 21:06:25.870773",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -88,7 +88,7 @@
  "image_field": "profile_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-29 22:55:50.024487",
+ "modified": "2026-05-01 22:34:09.333883",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Member",

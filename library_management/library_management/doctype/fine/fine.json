@@ -1,0 +1,147 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "FINE-.{loan}.-.##",
+ "creation": "2026-05-01 11:23:06.924328",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "fine_details_section",
+  "member",
+  "loan",
+  "book_item",
+  "book_title",
+  "column_break_uyxu",
+  "status",
+  "issue_date",
+  "fine_type",
+  "fine_payment_details_section",
+  "days_overdue",
+  "rate_per_day",
+  "column_break_ooyn",
+  "total_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Member",
+   "options": "Member",
+   "reqd": 1
+  },
+  {
+   "fieldname": "loan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Loan",
+   "options": "Loan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "book_item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Book Item",
+   "options": "Book Item",
+   "reqd": 1
+  },
+  {
+   "default": "Late Return",
+   "fieldname": "fine_type",
+   "fieldtype": "Select",
+   "label": "Fine Type",
+   "options": "Late Return\nDamage\nLost\nOther"
+  },
+  {
+   "fieldname": "column_break_uyxu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Unpaid",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Unpaid\nPartially Paid\nPaid\nWaived",
+   "reqd": 1
+  },
+  {
+   "default": "now",
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fine_details_section",
+   "fieldtype": "Section Break",
+   "label": "Fine Details"
+  },
+  {
+   "fieldname": "fine_payment_details_section",
+   "fieldtype": "Section Break",
+   "label": "Fine Payment Details"
+  },
+  {
+   "default": "1",
+   "fieldname": "days_overdue",
+   "fieldtype": "Int",
+   "label": "Days Overdue",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "default": "5",
+   "fieldname": "rate_per_day",
+   "fieldtype": "Currency",
+   "label": "Rate Per Day",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_ooyn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "book_item.book",
+   "fieldname": "book_title",
+   "fieldtype": "Data",
+   "label": "Book Title",
+   "options": "Book Item",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-05-01 23:04:00.654687",
+ "modified_by": "Administrator",
+ "module": "Library Management",
+ "name": "Fine",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
