@@ -7,10 +7,10 @@
  "engine": "InnoDB",
  "field_order": [
   "loan_details_section",
-  "loan_id",
-  "member",
-  "column_break_gagl",
   "member_id",
+  "loan_id",
+  "column_break_gagl",
+  "member_name",
   "section_break_kmwy",
   "book_id",
   "book_title",
@@ -23,14 +23,6 @@
  ],
  "fields": [
   {
-   "fieldname": "member",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Member",
-   "options": "Member",
-   "reqd": 1
-  },
-  {
    "fieldname": "issue_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -42,13 +34,12 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Due Date",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "return_date",
    "fieldtype": "Date",
-   "label": "Return Date",
-   "reqd": 1
+   "label": "Return Date"
   },
   {
    "fieldname": "status",
@@ -81,20 +72,18 @@
    "label": "Loan Details"
   },
   {
-   "fetch_from": "book_id.book",
    "fieldname": "book_title",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Book Title",
-   "options": "Book",
    "read_only": 1
   },
   {
    "fetch_from": "member.membership_id",
    "fieldname": "member_id",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Member ID",
-   "options": "Name",
-   "read_only": 1
+   "options": "Member",
+   "reqd": 1
   },
   {
    "fieldname": "amended_from",
@@ -114,13 +103,20 @@
    "link_filters": "[[\"Book Item\",\"status\",\"=\",\"Available\"]]",
    "options": "Book Item",
    "reqd": 1
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Member Name",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-01 22:31:43.640597",
+ "modified": "2026-05-02 13:07:32.175264",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Loan",
