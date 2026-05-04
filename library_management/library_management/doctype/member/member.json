@@ -16,7 +16,9 @@
   "membership_id",
   "join_date",
   "column_break_cnda",
-  "membership_status"
+  "membership_status",
+  "section_break_dzle",
+  "books"
  ],
  "fields": [
   {
@@ -82,13 +84,23 @@
    "label": "Membership Status",
    "options": "Active\nExpired\nBlocked\nPending",
    "reqd": 1
+  },
+  {
+   "fieldname": "section_break_dzle",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "books",
+   "fieldtype": "Table",
+   "label": "Books",
+   "options": "Inventory"
   }
  ],
  "grid_page_length": 50,
  "image_field": "profile_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-02 13:08:37.266590",
+ "modified": "2026-05-03 17:20:06.907594",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Member",

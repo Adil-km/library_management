@@ -8,6 +8,7 @@ from frappe.model.naming import getseries
 class Member(Document):
 	def autoname(self):
 		self.set_name_expression()
+
 	def before_save(self):
 		if self.last_name:
 			self.full_name = f"{self.first_name} {self.last_name}" 
@@ -16,6 +17,7 @@ class Member(Document):
 
 		if self.name:
 			self.membership_id = self.name
+		# frappe.errprint(20*"*")
 	
 	def set_name_expression(self):
 		# .{first_name}-M.####
