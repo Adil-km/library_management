@@ -17,6 +17,14 @@ class Member(Document):
 
 		if self.name:
 			self.membership_id = self.name
+		
+		for book in self.books:
+			loan_member_id = frappe.get_value("Loan",book.loan_id, "member_id")
+			if loan_member_id == self.membership_id:
+				book.book_id, book.book_title = frappe.db.get_value("Loan", book.loan_id, ["book_id", "book_title"])
+			else:
+				frappe.throw(f"{self.membership_id} has no loan {book.loan_id}")
+
 		# frappe.errprint(20*"*")
 	
 	def set_name_expression(self):
