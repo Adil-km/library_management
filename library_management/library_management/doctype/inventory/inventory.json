@@ -12,12 +12,14 @@
  ],
  "fields": [
   {
+   "fetch_from": "loan_id.book_id",
    "fieldname": "book_id",
    "fieldtype": "Data",
    "label": "Book ID",
    "read_only": 1
   },
   {
+   "fetch_from": "loan_id.book_title",
    "fieldname": "book_title",
    "fieldtype": "Data",
    "label": "Book Title",
@@ -36,7 +38,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-05-03 17:11:28.421822",
+ "modified": "2026-05-05 20:03:25.017006",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Inventory",
