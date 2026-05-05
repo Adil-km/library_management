@@ -8,7 +8,8 @@
  "field_order": [
   "loan_id",
   "book_id",
-  "book_title"
+  "book_title",
+  "member_id"
  ],
  "fields": [
   {
@@ -32,13 +33,20 @@
    "label": "Loan ID",
    "options": "Loan",
    "reqd": 1
+  },
+  {
+   "fetch_from": "loan_id.member_id",
+   "fieldname": "member_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Member_Id"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-05-05 20:03:25.017006",
+ "modified": "2026-05-05 20:11:09.115691",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Inventory",
