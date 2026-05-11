@@ -3,10 +3,10 @@
 
 import frappe
 from frappe.utils import add_to_date
-from frappe.model.document import Document
+from frappe.website.website_generator import WebsiteGenerator
 
 
-class Loan(Document):
+class Loan(WebsiteGenerator):
 	def validate_book_availbale(self):
 		curr_book = f"{self.book_title} - {self.book_id}"
 		if frappe.get_doc("Book Item", self.book_id).status != "Available":

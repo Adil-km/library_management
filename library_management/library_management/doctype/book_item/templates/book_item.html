@@ -1,0 +1,35 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+
+{% set book_title = frappe.db.get_value('Book', doc.book, 'title') %}
+{% set book_author_id = frappe.db.get_value('Book', doc.book, 'author') %}
+{% set book_author = frappe.db.get_value('Author', book_author_id, 'author_name') %}
+{% set book_author_route = frappe.db.get_value('Author', book_author_id, 'route') %}
+{% set book_description = frappe.db.get_value('Book', doc.book, 'description') %}
+{% set book_pub_date = frappe.db.get_value('Book', doc.book, 'publication_date') %}
+{% set book_category_id = frappe.db.get_value('Book', doc.book, 'category') %}
+{% set book_category = frappe.db.get_value('Category', book_category_id, 'category_name') %}
+{% set book_cover = frappe.db.get_value('Book', doc.book, 'cover_page') %}
+
+<div class="row justify-content-md-center">
+    {% if book_cover %}
+    <img src="{{book_cover}}" alt="cover page of book '{{book_title}}'">
+    {% endif%}
+</div>
+
+<h1>{{ book_title |e }} - {{book_author}}</h1>
+<div>
+    <span class="badge badge-pill badge-primary">{{book_category}}</span>
+    <span class="badge badge-pill badge-secondary">{{book_pub_date}}</span>
+</div>
+<h3>Author: <a href="/{{book_author_route}}">{{book_author}}</a></h3>
+{% if book_description %}
+    <p>Description: {{book_description}}</p>
+{% endif%}
+
+<a href="/loan" class="btn btn-primary btn-lg">Reserve This Book</a>
+
+{% endblock %}
+
+<!-- this is a sample default web page template -->

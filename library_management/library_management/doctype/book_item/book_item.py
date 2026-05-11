@@ -2,10 +2,10 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.model.document import Document
+from frappe.website.website_generator import WebsiteGenerator
 
 
-class BookItem(Document):
+class BookItem(WebsiteGenerator):
 	def before_save(self):
 		book_id = frappe.get_doc("Book", self.book).name
 		self.id = f"{self.name}-{book_id}"

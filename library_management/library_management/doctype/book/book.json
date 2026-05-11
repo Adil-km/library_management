@@ -67,14 +67,15 @@
   {
    "default": "A small description about this book",
    "fieldname": "description",
-   "fieldtype": "Data"
+   "fieldtype": "Data",
+   "label": "Description"
   }
  ],
  "grid_page_length": 50,
  "image_field": "cover_page",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-28 22:12:26.230774",
+ "modified": "2026-05-10 17:11:05.777431",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Book",
