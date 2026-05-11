@@ -1,5 +1,7 @@
 <div>
 	{% set book_title = frappe.db.get_value('Book', doc.book, 'title') %}
-	<a href="/{{ doc.route |e }}">{{book_title}}</a>
+	{% set book_author_id = frappe.db.get_value('Book', doc.book, 'author') %}
+	{% set book_author = frappe.db.get_value('Author', book_author_id, 'author_name') %}
+	<a href="/{{ doc.route |e }}">{{book_title}} | {{book_author}}</a>
 </div>
 <!-- this is a sample default list template -->

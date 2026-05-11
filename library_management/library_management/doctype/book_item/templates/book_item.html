@@ -12,6 +12,15 @@
 {% set book_category = frappe.db.get_value('Category', book_category_id, 'category_name') %}
 {% set book_cover = frappe.db.get_value('Book', doc.book, 'cover_page') %}
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/books">Books</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{book_title}}</li>
+  </ol>
+</nav>
+
+
 <div class="row justify-content-md-center">
     {% if book_cover %}
     <img src="{{book_cover}}" alt="cover page of book '{{book_title}}'">
@@ -20,15 +29,15 @@
 
 <h1>{{ book_title |e }} - {{book_author}}</h1>
 <div>
-    <span class="badge badge-pill badge-primary">{{book_category}}</span>
-    <span class="badge badge-pill badge-secondary">{{book_pub_date}}</span>
+    <span class="badge badge-pill badge-primary px-3 py-2">{{book_category}}</span>
+    <span class="badge badge-pill badge-secondary px-3 py-2">{{book_pub_date}}</span>
 </div>
 <h3>Author: <a href="/{{book_author_route}}">{{book_author}}</a></h3>
 {% if book_description %}
     <p>Description: {{book_description}}</p>
 {% endif%}
 
-<a href="/loan" class="btn btn-primary btn-lg">Reserve This Book</a>
+<a href="/reserve/new?book_id={{doc.id}}" class="btn btn-primary btn-lg">Reserve This Book</a>
 
 {% endblock %}
 

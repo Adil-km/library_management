@@ -6,6 +6,8 @@ from frappe.website.website_generator import WebsiteGenerator
 
 
 class BookItem(WebsiteGenerator):
-	def before_save(self):
+		
+	def before_validate(self):
 		book_id = frappe.get_doc("Book", self.book).name
-		self.id = f"{self.name}-{book_id}"
+		if book_id and self.name and not self.id:
+			self.id = f"{self.name}-{book_id}"

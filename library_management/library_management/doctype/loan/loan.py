@@ -5,7 +5,6 @@ import frappe
 from frappe.utils import add_to_date
 from frappe.website.website_generator import WebsiteGenerator
 
-
 class Loan(WebsiteGenerator):
 	def validate_book_availbale(self):
 		curr_book = f"{self.book_title} - {self.book_id}"
@@ -14,6 +13,21 @@ class Loan(WebsiteGenerator):
 
 	def before_save(self):		
 		self.validate_book_availbale()
+		
+		if not self.member_name:
+			self.member_name = frappe.get_value('Member', self.member_id, "full_name")
+		
+		if not self.book_title:
+			item_id = frappe.db.get_value('Book Item', self.book_id, 'book')
+			self.book_title = frappe.db.get_value('Book', item_id, 'title')
+
+		if not self.due_date:
+			days = 14
+			self.due_date = add_to_date(self.issue_date, days=days)
+
+	def before_validate(self):
+		if self.name and not self.loan_id:
+			self.loan_id = self.name
 
 	def on_submit(self):
 		self.validate_book_availbale()
