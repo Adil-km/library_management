@@ -13,12 +13,23 @@ frappe.ui.form.on("Loan", {
             frappe.db.get_value('Book Item', frm.doc.book_id, 'book')
                 .then(r => {
                     let book_name = r.message.book;
-                    return  frappe.db.get_value('Book', book_name, 'title')
+                    return frappe.db.get_value('Book', book_name, 'title')
                 })
                 .then(r =>{
                     frm.set_value("book_title",r.message.title)
                 });
         }
+    },
+    reservation_id : function(frm){
+        if (frm.doc.reservation_id) {
+            frappe.db.get_value('Reservation', frm.doc.reservation_id, ['member_name','member_id'])
+                .then(r =>{
+                    if (!r.message) return;
+                    frm.set_value("member_name",r.message.member_name)
+                    frm.set_value("member_id",r.message.member_id)
+                });
+        }
+        
     },
     member_id : function(frm){
         if (frm.doc.member_id) {

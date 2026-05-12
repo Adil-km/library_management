@@ -7,10 +7,11 @@
  "engine": "InnoDB",
  "field_order": [
   "loan_details_section",
+  "reservation_id",
   "member_id",
-  "loan_id",
-  "column_break_gagl",
   "member_name",
+  "column_break_gagl",
+  "loan_id",
   "is_published",
   "route",
   "section_break_kmwy",
@@ -82,12 +83,10 @@
    "read_only": 1
   },
   {
-   "fetch_from": "member.membership_id",
    "fieldname": "member_id",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Member ID",
-   "options": "Member",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "amended_from",
@@ -126,6 +125,13 @@
    "fieldtype": "Data",
    "label": "Route",
    "read_only": 1
+  },
+  {
+   "fieldname": "reservation_id",
+   "fieldtype": "Link",
+   "label": "Reservation ID",
+   "options": "Reservation",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
@@ -134,7 +140,7 @@
  "is_published_field": "is_published",
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-11 19:43:18.150452",
+ "modified": "2026-05-12 22:13:17.269782",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Loan",

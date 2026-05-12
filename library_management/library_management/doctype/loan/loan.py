@@ -13,7 +13,7 @@ class Loan(WebsiteGenerator):
 
 	def before_save(self):		
 		self.validate_book_availbale()
-		
+
 		if not self.member_name:
 			self.member_name = frappe.get_value('Member', self.member_id, "full_name")
 		
@@ -24,7 +24,7 @@ class Loan(WebsiteGenerator):
 		if not self.due_date:
 			days = 14
 			self.due_date = add_to_date(self.issue_date, days=days)
-
+	
 	def before_validate(self):
 		if self.name and not self.loan_id:
 			self.loan_id = self.name
@@ -32,6 +32,18 @@ class Loan(WebsiteGenerator):
 	def on_submit(self):
 		self.validate_book_availbale()
 		frappe.db.set_value("Book Item", self.book_id, "status", "Issued")
+
+		res_doc = frappe.get_doc("Reservation", self.reservation_id)
+		child_row = res_doc.append('books', {
+			'loan_id': self.loan_id,
+		})
+		res_doc.save()
 	
 	def on_cancel(self):
 		frappe.db.set_value("Book Item", self.book_id, "status", "Available")
+
+		res_doc = frappe.get_doc("Reservation", self.reservation_id)
+		for row in res_doc.books:
+			if row.loan_id != self.loan_id:
+				res_doc.remove(row)
+		res_doc.save()
