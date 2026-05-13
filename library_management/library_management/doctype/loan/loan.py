@@ -44,6 +44,6 @@ class Loan(WebsiteGenerator):
 
 		res_doc = frappe.get_doc("Reservation", self.reservation_id)
 		for row in res_doc.books:
-			if row.loan_id != self.loan_id:
+			if row.loan_id == self.loan_id:
 				res_doc.remove(row)
 		res_doc.save()
