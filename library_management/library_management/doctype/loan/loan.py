@@ -31,13 +31,18 @@ class Loan(WebsiteGenerator):
 
 	def on_submit(self):
 		self.validate_book_availbale()
-		frappe.db.set_value("Book Item", self.book_id, "status", "Issued")
 
 		res_doc = frappe.get_doc("Reservation", self.reservation_id)
+		if res_doc.status != "Active":
+			frappe.throw(f"Member is not Active. Cannot add Loan for member {self.member_name}")
+
+		# add child item in Reservation doctype
 		child_row = res_doc.append('books', {
 			'loan_id': self.loan_id,
 		})
 		res_doc.save()
+
+		frappe.db.set_value("Book Item", self.book_id, "status", "Issued")
 	
 	def on_cancel(self):
 		frappe.db.set_value("Book Item", self.book_id, "status", "Available")

@@ -10,6 +10,8 @@ class Reservation(Document):
 		self.member_name = frappe.get_doc("Member", self.member_id).full_name
 	
 	def validate(self):
+		if self.status != "Active":
+			frappe.throw("Member is not Active.")
 		loans = []
 		seen = set()
 
