@@ -46,11 +46,13 @@
    "label": "Return Date"
   },
   {
+   "allow_on_submit": 1,
    "default": "Issued",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Issued\nReturned\nLost\nDamaged"
+   "options": "Issued\nReturned\nLost\nDamaged",
+   "read_only": 1
   },
   {
    "fieldname": "loan_id",
@@ -140,7 +142,7 @@
  "is_published_field": "is_published",
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-12 22:13:17.269782",
+ "modified": "2026-05-15 10:12:38.927705",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Loan",

@@ -42,7 +42,16 @@ class Loan(WebsiteGenerator):
 		})
 		res_doc.save()
 
-		frappe.db.set_value("Book Item", self.book_id, "status", "Issued")
+		if self.status == "Issued":
+			frappe.db.set_value("Book Item", self.book_id, "status", "Issued")
+		
+	def on_update_after_submit(self):
+		if self.status == "Returned":
+			frappe.db.set_value("Book Item", self.book_id, "status", "Available")
+		elif self.status == "Damaged":
+			frappe.db.set_value("Book Item", self.book_id, "status", "Damaged")
+		elif self.status == "Lost":
+			frappe.db.set_value("Book Item", self.book_id, "status", "Lost")
 	
 	def on_cancel(self):
 		frappe.db.set_value("Book Item", self.book_id, "status", "Available")
