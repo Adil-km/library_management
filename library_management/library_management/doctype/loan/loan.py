@@ -2,7 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.utils import add_to_date
+from frappe.utils import add_to_date, today, days_diff
 from frappe.website.website_generator import WebsiteGenerator
 
 class Loan(WebsiteGenerator):
@@ -13,7 +13,6 @@ class Loan(WebsiteGenerator):
 
 	def before_save(self):		
 		self.validate_book_availbale()
-
 		if not self.member_name:
 			self.member_name = frappe.get_value('Member', self.member_id, "full_name")
 		
@@ -24,7 +23,7 @@ class Loan(WebsiteGenerator):
 		if not self.due_date:
 			days = 14
 			self.due_date = add_to_date(self.issue_date, days=days)
-	
+
 	def before_validate(self):
 		if self.name and not self.loan_id:
 			self.loan_id = self.name
@@ -46,6 +45,14 @@ class Loan(WebsiteGenerator):
 			frappe.db.set_value("Book Item", self.book_id, "status", "Issued")
 		
 	def on_update_after_submit(self):
+		if not self.return_date:
+			self.return_date = today()
+
+			doc = frappe.new_doc("Fine")
+			doc.loan_id = self.loan_id
+			doc.days_overdue = days_diff(self.due_date, self.return_date)
+			doc.insert()
+
 		if self.status == "Returned":
 			frappe.db.set_value("Book Item", self.book_id, "status", "Available")
 		elif self.status == "Damaged":

@@ -20,12 +20,12 @@ class Member(Document):
 
 	# create new Reservation record for this member
 	def after_insert(self):
-		frappe.errprint(20*"*")
 		if self.membership_id:
-			doc = frappe.get_doc(doctype="Reservation", member_id=self.membership_id)
+			doc = frappe.new_doc("Reservation")
+			doc.member_id = self.membership_id
 			doc.insert()
 			
-	# create Reservation record for this member
+	# delete Reservation record for this member
 	def on_trash(self):
 		reservation = frappe.db.get_value("Reservation",{"member_id": self.name})
 

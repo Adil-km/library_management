@@ -1,51 +1,29 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "FINE-.{loan}.-.##",
+ "autoname": "FINE-.{loan_id}.-.##",
  "creation": "2026-05-01 11:23:06.924328",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "fine_details_section",
-  "member",
-  "loan",
-  "book_item",
+  "loan_id",
+  "member_id",
+  "member_name",
+  "book_id",
   "book_title",
   "column_break_uyxu",
-  "status",
-  "issue_date",
+  "is_paid",
+  "fine_issue_date",
   "fine_type",
   "fine_payment_details_section",
   "days_overdue",
   "rate_per_day",
   "column_break_ooyn",
-  "total_amount"
+  "total_amount",
+  "amended_from"
  ],
  "fields": [
-  {
-   "fieldname": "member",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Member",
-   "options": "Member",
-   "reqd": 1
-  },
-  {
-   "fieldname": "loan",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Loan",
-   "options": "Loan",
-   "reqd": 1
-  },
-  {
-   "fieldname": "book_item",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Book Item",
-   "options": "Book Item",
-   "reqd": 1
-  },
   {
    "default": "Late Return",
    "fieldname": "fine_type",
@@ -56,21 +34,6 @@
   {
    "fieldname": "column_break_uyxu",
    "fieldtype": "Column Break"
-  },
-  {
-   "default": "Unpaid",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Unpaid\nPartially Paid\nPaid\nWaived",
-   "reqd": 1
-  },
-  {
-   "default": "now",
-   "fieldname": "issue_date",
-   "fieldtype": "Date",
-   "label": "Issue Date",
-   "reqd": 1
   },
   {
    "fieldname": "fine_details_section",
@@ -88,7 +51,7 @@
    "fieldtype": "Int",
    "label": "Days Overdue",
    "non_negative": 1,
-   "reqd": 1
+   "read_only": 1
   },
   {
    "default": "5",
@@ -108,18 +71,74 @@
    "read_only": 1
   },
   {
-   "fetch_from": "book_item.book",
+   "fetch_from": "loan_id.member_id",
+   "fieldname": "member_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Member ID",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "loan_id.member_name",
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Member Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "loan_id.book_title",
    "fieldname": "book_title",
    "fieldtype": "Data",
    "label": "Book Title",
-   "options": "Book Item",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "loan_id.book_id",
+   "fieldname": "book_id",
+   "fieldtype": "Data",
+   "label": "Book ID"
+  },
+  {
+   "fieldname": "loan_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Loan ID",
+   "options": "Loan",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "fine_issue_date",
+   "fieldtype": "Date",
+   "label": "Fine Issue Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Fine",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "is_paid",
+   "fieldtype": "Check",
+   "label": "Is Paid",
    "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2026-05-01 23:04:00.654687",
+ "modified": "2026-05-17 14:19:26.046524",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Fine",
